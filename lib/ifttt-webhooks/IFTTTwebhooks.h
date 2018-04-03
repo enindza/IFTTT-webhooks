@@ -16,8 +16,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 */
 
 
-#ifndef IFTTTMaker_h
-#define IFTTTMaker_h
+#ifndef IFTTTwebhooks_h
+#define IFTTTwebhooks_h
 
 #include <Arduino.h>
 #include <Client.h>
@@ -29,10 +29,10 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 #pragma once
 #include <WiFiClientSecure.h>
 
-class IFTTTMaker : public WiFiClientSecure
+class IFTTTwebhooks : public WiFiClientSecure
 {
   public:
-    IFTTTMaker (String key);
+    IFTTTwebhooks (String key);
     String sendTriggerEvent(String eventName);
     String sendTriggerEventWithData(String eventName, JsonObject& payload);
     bool triggerEvent(String eventName, String value1 = "", String value2 = "", String value3= "");

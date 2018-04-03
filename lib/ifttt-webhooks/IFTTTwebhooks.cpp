@@ -17,14 +17,13 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 */
 
 
-#include "IFTTTMaker.h"
+#include "IFTTTwebhooks.h"
 
-IFTTTMaker::IFTTTMaker(String key)	{
+IFTTTwebhooks::IFTTTwebhooks(String key)	{
   _key = key;
-  //this->client = &client;
 }
 
-String IFTTTMaker::sendTriggerEvent(String eventName) {
+String IFTTTwebhooks::sendTriggerEvent(String eventName) {
 	String response="";
   bool finishedHeaders = false;
   bool currentLineIsBlank = true;
@@ -48,13 +47,10 @@ String IFTTTMaker::sendTriggerEvent(String eventName) {
 			}
 		}
 	}
-
-  //Serial.println("response");
-  //Serial.println(response);
   return response;
 }
 
-String IFTTTMaker::sendTriggerEventWithData(String eventName, JsonObject& payload) {
+String IFTTTwebhooks::sendTriggerEventWithData(String eventName, JsonObject& payload) {
 	String response="";
   bool finishedHeaders = false;
   bool currentLineIsBlank = true;
@@ -100,7 +96,7 @@ String IFTTTMaker::sendTriggerEventWithData(String eventName, JsonObject& payloa
   return response;
 }
 
-bool IFTTTMaker::triggerEvent(String eventName , String value1, String value2, String value3){
+bool IFTTTwebhooks::triggerEvent(String eventName , String value1, String value2, String value3){
 
   DynamicJsonBuffer jsonBuffer;
   JsonObject& payload = jsonBuffer.createObject();
@@ -121,7 +117,7 @@ bool IFTTTMaker::triggerEvent(String eventName , String value1, String value2, S
   return false;
 }
 
-bool IFTTTMaker::checkForSucessResponse(String response) {
+bool IFTTTwebhooks::checkForSucessResponse(String response) {
 
   int index = response.indexOf("Congratulations!");
 

@@ -1,27 +1,26 @@
-#include <IFTTTMaker.h>
-
 /*******************************************************************
  *  Trigger event at end of the setup                              *
  *                                                                 *
- *  adapted by Brian Lough                                         *
+ *  adapted by Brian Lough
+ *
+ *          changed by enindza                                      *
  *******************************************************************/
 
-
+#include <IFTTTwebhooks.h>
 #include <ESP8266WiFi.h>
 #include <WiFiClientSecure.h>
 
-//------- Replace the following! ------
-char ssid[] = "xxx";       // your network SSID (name)
+#include "local.h"
+// content of local.h
+// comment out #include #include "local.h"
+//------- Uncomment the following! and replace with your data ------
+/*char ssid[] = "xxx";       // your network SSID (name)
 char password[] = "yyyy";  // your network key
-#define KEY "zzzzzzzzzzzzzzzzzzzzzzz"  // Get it from this page https://ifttt.com/services/maker/settings
+#define KEY "zzzzzzzzzzzzzzzzzzzzzzz"  // Get it from this page https://ifttt.com/services/maker_webhooks/settings
 #define EVENT_NAME "device_on" // Name of your event name, set when you are creating the applet
+*/
 
-
-//HTTPSRedirect* client = nullptr
-IFTTTMaker* client = nullptr;
-
-//WiFiClientSecure client;
-//IFTTTMaker ifttt(KEY, client);
+IFTTTwebhooks* client = nullptr;
 
 void setup() {
 
@@ -47,14 +46,10 @@ void setup() {
   IPAddress ip = WiFi.localIP();
   Serial.println(ip);
 
-  // Use HTTPSRedirect class to create a new TLS connection
-//    client = new HTTPSRedirect(httpsPort);
-//    client->setPrintResponseBody(true);
-//    client->setContentTypeHeader("application/json");
+  Serial.printf("Free heap0: %u\n", ESP.getFreeHeap());
 
-  client = new IFTTTMaker(KEY);
-  //client->setPrintResponseBody(true);
-  //client->setContentTypeHeader("application/json");
+  // Use IFTTTwebhooks class to create a new TLS connection
+  client = new IFTTTwebhooks(KEY);
 
   //triggerEvent takes an Event Name and then you can optional pass in up to 3 extra Strings
   if(client->triggerEvent(EVENT_NAME, ssid, ip.toString())){
@@ -63,7 +58,12 @@ void setup() {
   {
     Serial.println("Failed!");
   }
+  Serial.printf("Free heap1: %u\n", ESP.getFreeHeap());
 
+// delete IFTTTwebhooks object
+  delete client;
+  client = nullptr;
+  Serial.printf("Free heap2: %u\n", ESP.getFreeHeap());
 }
 
 void loop() {

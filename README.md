@@ -19,7 +19,7 @@ Include IFTTTwebhooks in your project:
 
     #include <IFTTTwebhooks.h>
 
-and pass it a Maker service key (you can find it [here](https://ifttt.com/services/maker/settings)) and a SSL Client (See the examples for more details)
+and pass it a Maker service key (you can find it [here](https://ifttt.com/services/maker_webhooks/settings) and a SSL Client (See the examples for more details)
 
     #define KEY "zzzzzzzzzzzzzzzzzzzzzzz"
     #define EVENT_NAME "device_on"

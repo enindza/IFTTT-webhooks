@@ -53,10 +53,10 @@ void setup() {
 
   //triggerEvent takes an Event Name and then you can optional pass in up to 3 extra Strings
   if(client->triggerEvent(EVENT_NAME, ssid, ip.toString())){
-    Serial.println("Successfully sent");
+    Serial.println("IFTTT Successfully sent");
   } else
   {
-    Serial.println("Failed!");
+    Serial.println("IFTTT Failed!");
   }
   Serial.printf("Free heap1: %u\n", ESP.getFreeHeap());
 
